@@ -22,7 +22,7 @@ Package goapt provides go bindings for the APT package management tool.
 The bindings allow exploring the APT cache and configuration. They use cgo
 with a middle layer of C bindings to the underlying C++ code.
 */
-package goapt
+package apt
 
 // #cgo LDFLAGS: -lapt-pkg
 // #include <stdlib.h>

@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/julian-klode/goapt"
+	"github.com/julian-klode/go-apt"
 )
 
 func main() {
@@ -14,7 +14,7 @@ func main() {
 	cand := session.Policy().CandidateVersion(apt)
 
 	println("The current candidate for APT is:", cand.VerStr())*/
-	session := &goapt.Session{}
+	session := &apt.Session{}
 	cfg, err := session.Config()
 	if err != nil {
 		log.Fatal("Could not load configuration:", err)
