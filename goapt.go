@@ -30,22 +30,6 @@ package apt
 import "C"
 import "unsafe"
 
-// InitConfig (re-)initializes the configuration
-func InitConfig() {
-	C.apt_init_config()
-}
-
-// InitSystem initializes the packaging system like the "deb" one
-func InitSystem() {
-	C.apt_init_system()
-}
-
-// Init initializes both the configuration and the system.
-func init() {
-	InitConfig()
-	InitSystem()
-}
-
 // Session represents the C++ type pkgCacheFile, a cache with a depcache, a
 // policy, and so on.
 type Session struct{}
@@ -53,7 +37,12 @@ type Session struct{}
 // NewSession opens a new session. Note that Config() and System() really are
 // global variables. They will be initialized here, but there can only really
 // be one session at one time.
-func NewSession() (*Session, error)
+func NewSession() (*Session, error) {
+	C.apt_init_config()
+	C.apt_init_system()
+
+	return nil, nil
+}
 
 // NewSessionWithConfig opens a new session, with the specified configuration
 // set as the global configuration object instead of the default one.

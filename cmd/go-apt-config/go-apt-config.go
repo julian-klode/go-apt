@@ -8,13 +8,10 @@ import (
 )
 
 func main() {
-	/*session := goapt.NewSession()
-
-	apt := session.Cache().Lookup("apt", "native")
-	cand := session.Policy().CandidateVersion(apt)
-
-	println("The current candidate for APT is:", cand.VerStr())*/
-	session := &apt.Session{}
+	session, err := apt.NewSession()
+	if err != nil {
+		log.Fatal("Could not load session:", err)
+	}
 	cfg, err := session.Config()
 	if err != nil {
 		log.Fatal("Could not load configuration:", err)
