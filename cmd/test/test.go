@@ -1,7 +1,11 @@
 package main
 
-import "github.com/julian-klode/goapt"
-import "os"
+import (
+	"log"
+	"os"
+
+	"github.com/julian-klode/goapt"
+)
 
 func main() {
 	/*session := goapt.NewSession()
@@ -10,8 +14,11 @@ func main() {
 	cand := session.Policy().CandidateVersion(apt)
 
 	println("The current candidate for APT is:", cand.VerStr())*/
-
-	cfg := goapt.GetConfig()
+	session := &goapt.Session{}
+	cfg, err := session.Config()
+	if err != nil {
+		log.Fatal("Could not load configuration:", err)
+	}
 	for _, arg := range os.Args {
 		println(arg, "=>", cfg.Find(arg))
 	}
